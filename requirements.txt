@@ -2,6 +2,11 @@
 pandas
 numpy
 
+
+# Data scraping & web APIs
+
+google-play-scraper
+
 # Text processing & NLP
 nltk
 textblob
@@ -18,6 +23,7 @@ seaborn
 
 # Interactive analysis
 jupyterlab
+streamlit
 
 # Stats
 statsmodels

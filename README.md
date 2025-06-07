@@ -16,6 +16,7 @@ The project includes:
 📊 UX pain point detection and feature insight generation  
 🛢️ Relational database setup using Oracle XE  
 📈 Stakeholder-ready visualizations and diagnostics
+✅ **Streamlit App** for a seamless, non-technical user experience  
 
 
 ## 🔧 Project Setup
@@ -66,236 +67,186 @@ CI workflow is defined at:
 <!-- TREE START -->
 📁 Project Structure
 
-b5w2-customer-ux-analytics-challenge/
+solar-challenge-week1/
+├── LICENSE
+├── README.md
+├── requirements.txt
+├── .github/
+│   └── workflows/
+│       ├── unittests.yml
 ├── data/
-│   ├── raw/
 │   ├── cleaned/
-│   └── outputs/
+│   │   ├── reviews_all_banks_20250607_140803_cleaned.csv
+│   │   ├── reviews_all_banks_20250607_141201_cleaned.csv
+│   │   ├── reviews_all_banks_cleaned.csv
+│   ├── outputs/
+│   └── raw/
+│       ├── reviews_BOA_20250607_124729.csv
+│       ├── reviews_CBE_20250607_124725.csv
+│       ├── reviews_Dashen_20250607_124733.csv
+│       ├── reviews_all_banks.csv
+│       ├── reviews_all_banks_20250607_140803.csv
+│       ├── reviews_all_banks_20250607_141201.csv
 ├── notebooks/
+│   ├── README.md
+│   ├── __init__.py
 │   ├── task-1-scraping-preprocessing.ipynb
 │   ├── task-2-sentiment-thematic-analysis.ipynb
 │   ├── task-3-oracle-storage.ipynb
-│   └── task-4-insights-visuals.ipynb
+│   ├── task-4-insights-visuals.ipynb
 ├── scripts/
+│   ├── __init__.py
+│   ├── cleaning_runner.py
+│   ├── generate_tree.py
+│   ├── oracle_insert.py
+│   ├── run_streamlit.py
 │   ├── scraping_runner.py
 │   ├── sentiment_pipeline.py
-│   ├── oracle_insert.py
 │   ├── visualize_insights.py
 ├── src/
-│   ├── scraper/
-│   │   └── review_scraper.py
-│   ├── nlp/
-│   │   ├── sentiment_classifier.py
-│   │   └── keyword_theme_extractor.py
+│   ├── __init__.py
+│   ├── cleaning/
+│   │   ├── review_cleaner.py
 │   ├── db/
-│   │   └── oracle_connector.py
+│   │   ├── oracle_connector.py
+│   ├── nlp/
+│   │   ├── keyword_theme_extractor.py
+│   │   ├── sentiment_classifier.py
+│   ├── scraper/
+│   │   ├── review_scraper.py
 │   └── utils/
-│       └── preprocessing.py
-├── .github/
-│   └── workflows/
-│       └── unittests.yml
-├── requirements.txt
-├── README.md
-├── .gitignore
-└── LICENSE
+│       ├── preprocessing.py
+├── tests/
+│   ├── __init__.py
+└── ui/
+    ├── app_streamlit.py
+<!-- TREE END -->
 
 
 ## ✅ Status
-- ☑️ Repo initialized and virtual environment created (customer-ux-challenge)
-- ☑️ GitHub Actions CI configured for Python 3.10
-- ☑️ Play Store scraping functional for 3 bank apps
-- ☑️ Review cleaning, deduplication, and date normalization implemented
-- ☑️ Sentiment scoring (VADER, DistilBERT) integrated
-- ☑️ Keyword extraction and theme clustering per bank working
-- ☑️ Oracle database schema + insertion logic tested
-- ☑️ Insight visualizations (sentiment bar charts, theme clouds, complaint timelines) generated
-- ☑️ Interim report and final report scaffolding prepared
+
+- ☑️ Task 1 complete: scraping and cleaning pipeline finalized
+
+- ☑️ Streamlit UI for end-to-end data collection and preprocessing
+
+- ☑️ Modular architecture for reuse in scripts and notebooks
+
+- ☑️ Row diagnostics and metadata tracking implemented
+
+- ☑️ Ready for Task 2: Sentiment & Thematic NLP Pipeline
 
 
 ## 📦 What's in This Repo
 
-This repository documents the Week 2 challenge for 10 Academy’s AI Mastery Bootcamp. It includes:
+This repository is structured to maximize modularity, reusability, and clarity:
+
+- 📁 Scaffolded directory layout for pipelines, UIs, and NLP modules
+- 💻 Streamlit UI for scraping and cleaning with per-bank selection, export toggles, and file previews
+- 🧪 CI/CD automation via GitHub Actions for reproducibility
+- 🧹 Auto-updating README structure using generate_tree.py
+- 📚 Notebook-first development with clean progression through all tasks
+This repository documents the Week 1 challenge for 10 Academy’s AI Mastery Bootcamp. It includes:
 
 - 📁 **Scaffolded directory structure** using best practices for `src/`, `notebooks/`, `scripts/`, and `tests/`
+
+- 💻 Streamlit UI for scraping and cleaning with per-bank selection, export toggles, and file previews
 
 - 🧪 **CI/CD integration** via GitHub Actions for reproducibility and reliability
 
 - 🧹 **README auto-updating** via `scripts/generate_tree.py` to keep documentation aligned with project layout
 
+- 📚 Notebook-first development with clean progression through all tasks
+
+- 📊 Modular EDA workflows for review cleaning, UX issue detection, and app-specific user sentiment
+
 - 📚 **Clear Git hygiene** (no committed `.venv` or `.csv`), commit messages and pull request usage
-
-- 🧹 **Data processing pipelines** for scraping, cleaning, sentiment tagging, and keyword-theme extraction using Python and modern NLP libraries (spaCy, TextBlob, Transformers)
-
-- 🧊 **Oracle-compatible database insertion logic**, designed to simulate real-world enterprise data engineering practices in fintech contexts
-
-- 📊 **Visual analytics for stakeholders**, including sentiment distributions, complaint tracking, and keyword clouds
 
 - 🧠 **My Contributions:** All project scaffolding, README setup, automation scripts, and CI configuration were done from scratch by me
 
+
 ## 🧪 Usage
 
-**🔍 How the `eda_orchestrator.py` Pipeline Works**
+### 🎛️ Option 1: Using the Streamlit App
 
-This script orchestrates the full Task 1 exploratory data analysis (EDA) pipeline for the B5W1 challenge. It covers data loading, text cleaning, sentiment labeling, event extraction, and stock-level headline diagnostics.
+The Streamlit UI (`ui/app_streamlit.py`) provides an interactive interface to perform both review scraping and cleaning with no code required.
 
-📍 Pipeline is intended to be run from the project root. Adjusts automatically if run from `/notebooks/`.
+**To launch the app locally:**
+```bash
+streamlit run ui/app_streamlit.py
+```
 
-**🔁 Pipeline Steps**
+**🧩 Streamlit Features:**
 
-1. Dataset Load
+- Scrape Google Play reviews for CBE, BOA, or Dashen
 
-- Loads `raw_analyst_ratings.csv` using a custom loader class.
-- Ensures error handling for file not found or format issues.
+- Export reviews per-bank or as a combined dataset
 
-2. Timestamp Cleaning
+- Preview scraped files in-app
 
-- Adds c`leaned_date` by parsing various datetime formats.
-- Standardizes timestamps for alignment with OHLCV data.
+- Clean any raw file from `data/raw/`
 
-3. Headline Cleaning
+- View sidebar diagnostics for:
 
-- Applies lowercasing, punctuation removal, HTML stripping, and stopword filtering to headline text.
-- Adds `cleaned_headline` column.
+    - Missing fields dropped
 
-4. Feature Extraction
+    - Blank reviews removed
 
-- Computes `word_count` and `headline_length` for textual diagnostics.
-- Analyzes top publishers and visualizes their activity by time.
+    - Duplicate `reviewIds` filtered
 
-5. Distribution Plots
+- Download cleaned outputs directly
 
-- Plots histogram distributions of headline lengths and word counts.
-- Uses Seaborn styling and verbose labeling for interpretation.
-
-6. Sentiment Labeling
-
-- Flags bullish and bearish keywords.
-- Applies VADER for sentence-level polarity scoring.
-- Combines multiple sentiment cues into an ensemble label (`ensemble_sentiment`).
-
-7. Event Extraction
-
-- Extracts named entities and noun phrases.
-- Uses REBEL for structured event detection.
-- Plots most frequent financial event types and their timeline.
-
-8. Stock-Level Diagnostics
-
-- Analyzes headline volumes per ticker and visualizes sentiment share.
-- Plots ticker-specific sentiment shifts and headline bursts (e.g. for AAPL).
-
-Outputs are used as enriched input for downstream Task 2 alignment and modeling.
+All exports are timestamped and saved to `data/raw/` or `data/cleaned/` depending on context.
 
 
-**📈 How the `quantitative_analysis_orchestrator.py` Pipeline Works**
+### 🐍 Option 2: Using Python Scripts
+For automated, reproducible runs from the command line or notebooks, use the modular runners in the `scripts/` folder.
 
-This script runs the Task 2 pipeline for the B5W1 challenge: aligning enriched sentiment signals with historical price data, computing forward returns, calculating technical indicators, and preparing a diagnostic-ready output for each stock.
+**🔹 Scraping Reviews**
+To scrape reviews from one or more banks and export to CSV:
 
-📍 All outputs are saved to `data/outputs/`. The pipeline is designed to be run from the project root.
+```python
+ scripts/scraping_runner.py --bank CBE --num_reviews 100
+ ```
 
-**🔁 Pipeline Steps**
+Options:
 
-1. Load Historical Price Data
+- `--bank`: one of `CBE`, `BOA`, `Dashen`, or `all`
 
-- Loads all OHLCV `.csv` files from `data/yfinance_data/`, one per ticker (e.g., `AAPL_historical_data.csv`).
-- Validates schema, deduplicates columns, and ensures datetime ordering.
+- `--num_reviews`: maximum number of reviews per app
 
-2. Load Enriched Sentiment Data
+**🔹 Cleaning Reviews**
+To clean a raw file and export the cleaned result:
 
-- Uses `data/cleaned_headlines_sample.csv` from Task 1 as input.
-- Parses tickers, converts dates, and aligns schema for join with price data.
+```python 
+scripts/cleaning_runner.py --input_file data/raw/reviews_BOA_20250607_124729.csv
+```
 
-3. Sentiment–Price Alignment
+This removes:
 
-- Merges headline sentiment data with OHLCV time series using a ticker-date key.
-- Applies exponential decay to aggregate lagged sentiment signals over a configurable window.
-- Adds daily forward returns (1-day, 3-day, 5-day) for correlation diagnostics.
+- Rows with missing fields
 
-4. Volume–Sentiment Divergence Tagging
+- Blank or whitespace-only reviews
 
-- Detects abnormal volume spikes using Z-score thresholds.
-- Tags days where sentiment signals and volume direction disagree, suggesting hidden divergences.
+- Duplicate entries by `reviewId`
 
-5. Technical Indicator Calculation
+Cleaned files are saved under `data/cleaned/`.
 
-- Computes core TA indicators per ticker using `TA-Lib`:
-    - Simple Moving Average (SMA 14)
-    - Exponential Moving Average (EMA 14)
-    - Relative Strength Index (RSI 14)
-    - MACD and Signal line
-    - Average True Range (ATR 14)
-- Appends results to the aligned dataframe.
+### 🔁 How It Works Internally
 
-6. Hybrid Performance Summary
+Both the Streamlit app and script-based runners share the same core logic, implemented in the following modules:
 
-- Computes per-ticker:
-    - Annualized Return
-    - Annualized Volatility
-    - Sharpe Ratio (risk-free rate = 0)
-    - Max Drawdown
-- Summary is printed for inspection, not saved.
+- `src/scraper/review_scraper.py` – Fetches reviews from the Play Store
 
-7. Final Output Saved
+- `src/cleaning/review_cleaner.py` – Cleans and validates reviews
 
- - ✅ `enriched_full_df.csv`: Full dataset before merge
- - ✅ `enriched_aligned_df.csv`: Final sentiment–price–TA dataframe ready for modeling
-- 📂 Location: `data/outputs/`
+- `src/utils/preprocessing.py` – Shared text preprocessing functions
 
-**📊 Visual Diagnostics (Optional)**
-While plots were not auto-saved, the script includes logic for:
+- `scripts/run_streamlit.py` – Optional wrapper for launching UI from CLI
 
-- Plotting sentiment vs price overlays
-- Visualizing technical indicators over time
-- Displaying divergence signals
+- `scripts/generate_tree.py` – Auto-generates folder tree for `README.md`
 
-These can be manually run via notebook for exploratory analysis or integrated into future automated runs.
+Each module is written using object-oriented principles and is fully reusable across CLI, notebook, and UI contexts.
 
-### 🧠 How the `correlation_analysis_orchestrator.py` Pipeline Works
-
-This script runs the Task 3 pipeline for the B5W1 challenge: computing statistical correlations between sentiment signals and subsequent stock price movements. It leverages exponentially weighted sentiment aggregation, multiple correlation methods, and ticker-specific diagnostics.
-
-📍 The script is designed to be run from the project root. All visual outputs and correlation results are generated in-memory for flexible inspection and downstream reporting.
-
----
-
-### 🔁 Pipeline Steps
-
-#### 1. Load Aligned Sentiment–Price Data
-- Reads the merged output from Task 2: `data/outputs/enriched_aligned_df.csv`
-- Validates schema, coerces timestamp formats, and standardizes tickers.
-
-#### 2. Daily Sentiment Aggregation
-- Applies exponential decay (λ = 0.5) to compute rolling sentiment scores per ticker and date.
-- Aggregated scores are stored in `agg_sentiment_ewm`.
-
-#### 3. Correlation Feature Selection
-- Dynamically selects sentiment features (e.g., `weighted_sentiment`, `agg_sentiment_ewm`) and return features (e.g., `forward_return_1d`, `return_t`, etc.).
-- Ensures all required columns are available before analysis proceeds.
-
-#### 4. Correlation Computation
-- Computes per-ticker correlation matrices using:
-  - Pearson (linear)
-  - Spearman (rank-based)
-  - Kendall (ordinal)
-- Results include ticker, method, variable pairs, and correlation strength.
-
-#### 5. Visual Diagnostics
-- Plots Pearson heatmaps to show cross-variable correlation intensities.
-- Displays top-N strongest Spearman correlations across tickers.
-- Generates scatter plots for specific ticker–signal pairs (e.g., `AAPL`, `agg_sentiment_ewm` vs `forward_return_1d`).
-
----
-
-### 📦 Outputs
-
-- Correlation results are stored in-memory (`correlation_df`) and can be exported manually via notebook or extended pipeline logic.
-- Visual plots are shown interactively and can be saved as needed (e.g., PNGs via `visualizer.save_plot()`).
-
----
-
-### 🧪 Diagnostic Highlights
-- Dynamic error handling ensures fallback when features or tickers are missing.
-- Verbose logging prints sample data previews, correlation strength diagnostics, and failure contexts for debugging.
 
 ## 🧠 Design Philosophy
 This project was developed with a focus on:

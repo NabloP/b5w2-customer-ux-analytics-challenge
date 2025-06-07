@@ -1,0 +1,29 @@
+# Core data libraries
+pandas
+numpy
+
+
+# Data scraping & web APIs
+
+google-play-scraper
+
+# Text processing & NLP
+nltk
+textblob
+spacy>=3.7.0
+en-core-web-sm @ https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.7.1/en_core_web_sm-3.7.1-py3-none-any.whl
+transformers
+sentencepiece
+accelerate
+rapidfuzz
+
+# Visualization
+matplotlib
+seaborn
+
+# Interactive analysis
+jupyterlab
+streamlit
+
+# Stats
+statsmodels

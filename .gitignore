@@ -13,6 +13,7 @@ customer-ux-challenge/
 
 # 💾 Data & output
 data/
+models/
 *.csv
 *.xlsx
 *.log

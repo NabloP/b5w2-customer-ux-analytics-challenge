@@ -11,12 +11,17 @@ This project simulates the role of a data analyst at Omega Consultancy, advising
 
 The project includes:
 
-🧹 Clean scraping and preprocessing of Play Store reviews  
-💬 Sentiment analysis (VADER, DistilBERT) and keyword clustering  
-📊 UX pain point detection and feature insight generation  
-🛢️ Relational database setup using Oracle XE  
-📈 Stakeholder-ready visualizations and diagnostics
-✅ **Streamlit App** for a seamless, non-technical user experience  
+- 🧹 Clean scraping and preprocessing of Play Store reviews  
+
+- 💬 Sentiment analysis (VADER, DistilBERT) and keyword clustering  
+
+- 📊 UX pain point detection and feature insight generation  
+
+- 🛢️ Relational database setup using Oracle XE  
+
+- 📈 Stakeholder-ready visualizations and diagnostics
+
+- ✅ **Streamlit App** for a seamless, non-technical user experience  
 
 
 ## 🔧 Project Setup
@@ -24,29 +29,33 @@ The project includes:
 To reproduce this environment:
 
 1. Clone the repository:
-   ```bash
+
+```bash
 git clone https://github.com/NabloP/b5w2-customer-ux-analytics-challenge.git
 cd b5w2-customer-ux-analytics-challenge
-   ```
+```
 
 2. Create and activate a virtual environment:
    
-   **On Windows:**
-    ```bash
-    python -m venv customer-ux-challenge
-    .\customer-ux-challenge\Scripts\Activate.ps1
-    ```
+**On Windows:**
+    
+```bash
+python -m venv customer-ux-challenge
+.\customer-ux-challenge\Scripts\Activate.ps1
+```
 
-    **On macOS/Linux:**
-    ```bash
-    python3 -m venv customer-ux-challenge
-    source customer-ux-challenge/bin/activate
-    ```
+**On macOS/Linux:**
+
+```bash
+python3 -m venv customer-ux-challenge
+source customer-ux-challenge/bin/activate
+```
 
 3. Install dependencies
-    ```bash
-    pip install -r requirements.txt
-    ```
+
+```bash
+pip install -r requirements.txt
+```
 
 ## ⚙️ CI/CD (GitHub Actions)
 
@@ -213,6 +222,7 @@ Options:
 - `--bank`: one of `CBE`, `BOA`, `Dashen`, or `all`
 
 - `--num_reviews`: maximum number of reviews per app
+
 
 **🔹 Cleaning Reviews**
 To clean a raw file and export the cleaned result:

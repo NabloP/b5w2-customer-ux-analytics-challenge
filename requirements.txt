@@ -16,6 +16,14 @@ transformers
 sentencepiece
 accelerate
 rapidfuzz
+llama-cpp-python
+symspellpy
+git+https://github.com/gotutiyan/gector
+huggingface_hub
+scikit-learn
+yake
+vaderSentiment
+
 
 # Visualization
 matplotlib

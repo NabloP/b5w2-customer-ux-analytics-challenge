@@ -1,7 +1,10 @@
+#Core libraries
+python-dotenv
+datetime
+
 # Core data libraries
 pandas
 numpy
-
 
 # Data scraping & web APIs
 
@@ -35,3 +38,8 @@ streamlit
 
 # Stats
 statsmodels
+
+# Database connectors
+oracledb
+sqlalchemy
+cx_Oracle

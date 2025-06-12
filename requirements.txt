@@ -7,7 +7,6 @@ pandas
 numpy
 
 # Data scraping & web APIs
-
 google-play-scraper
 
 # Text processing & NLP
@@ -31,6 +30,7 @@ vaderSentiment
 # Visualization
 matplotlib
 seaborn
+wordcloud
 
 # Interactive analysis
 jupyterlab
@@ -43,3 +43,6 @@ statsmodels
 oracledb
 sqlalchemy
 cx_Oracle
+
+# Testing
+pytest

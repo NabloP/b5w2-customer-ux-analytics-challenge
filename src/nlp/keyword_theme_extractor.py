@@ -140,8 +140,30 @@ class ThemeExtractor:
              'Notifications':    ['alert','notification','push','reminder','email'],
              'Stability & Bugs': ['crash','freeze','error','bug','exception'],
           },
-          'BOA': { ... },
-          'Dashen': { ... }
+          'BOA': {
+             'Concise Feedback': ['good','bad','fine','ok'],
+             'Account Access':   ['login','otp','password','pin'],
+             'Connection Issues':['network','offline','timeout','disconnect'],
+             'Usability':        ['hard to use','navigate','layout','ux'],
+             'Performance':      ['slow','lag','speed','delay','fast'],
+             'Functionality':    ['feature','cannot','unable','doesn't','option'],
+             'Feature Requests':['should have','wish','add','feature request'],
+             'Security & Trust':['secure','fraud','trust','encryption','leak'],
+             'Notifications':    ['alert','notification','push','reminder','email'],
+             'Stability & Bugs': ['crash','freeze','error','bug','exception'],
+          },
+          'Dashen': {
+             'Concise Feedback': ['good','bad','fine','ok'],
+             'Account Access':   ['login','otp','password','pin'],
+             'Connection Issues':['network','offline','timeout','disconnect'],
+             'Usability':        ['hard to use','navigate','layout','ux'],
+             'Performance':      ['slow','lag','speed','delay','fast'],
+             'Functionality':    ['feature','cannot','unable','doesn't','option'],
+             'Feature Requests':['should have','wish','add','feature request'],
+             'Security & Trust':['secure','fraud','trust','encryption','leak'],
+             'Notifications':    ['alert','notification','push','reminder','email'],
+             'Stability & Bugs': ['crash','freeze','error','bug','exception'],
+          }
         }
         """
         # store per-bank theme keyword mapping

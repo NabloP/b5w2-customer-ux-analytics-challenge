@@ -79,16 +79,31 @@ CI workflow is defined at:
 solar-challenge-week1/
 ├── LICENSE
 ├── README.md
+├── pytest.ini
 ├── requirements.txt
 ├── .github/
 │   └── workflows/
 │       ├── unittests.yml
 ├── data/
 │   ├── cleaned/
+│   │   ├── reviews_CBE_20250607_124725_cleaned.csv
 │   │   ├── reviews_all_banks_20250607_140803_cleaned.csv
 │   │   ├── reviews_all_banks_20250607_141201_cleaned.csv
 │   │   ├── reviews_all_banks_cleaned.csv
 │   ├── outputs/
+│   │   ├── reviews_enriched_all.csv
+│   │   ├── reviews_with_sentiment_themes.csv
+│   │   ├── spacy_symspell_corrected_100.csv
+│   │   ├── vader_tfidf_enriched_100.csv
+│   │   └── plots/
+│   │       ├── average_rating_by_theme_and_bank.png
+│   │       ├── boa_word_cloud.png
+│   │       ├── cbe_word_cloud.png
+│   │       ├── complaints_by_theme_and_bank.png
+│   │       ├── dashen_word_cloud.png
+│   │       ├── feature_requests_by_theme_and_bank.png
+│   │       ├── user_ratings_by_bank.png
+│   │       ├── y_day_rolling_sentiment_trend_per_bank.png
 │   └── raw/
 │       ├── reviews_BOA_20250607_124729.csv
 │       ├── reviews_CBE_20250607_124725.csv
@@ -96,6 +111,30 @@ solar-challenge-week1/
 │       ├── reviews_all_banks.csv
 │       ├── reviews_all_banks_20250607_140803.csv
 │       ├── reviews_all_banks_20250607_141201.csv
+│       ├── reviews_all_banks_20250609_121659.csv
+├── models/
+│   ├── mistral-7b-instruct-v0.2.Q4_K_M.gguf
+│   ├── tinyllama-1.1b-chat-v1.0.Q4_K_M.gguf
+│   ├── verb-form-vocab.txt
+│   ├── distilbert-base-uncased-finetuned-sst-2-english/
+│   │   ├── README.md
+│   │   ├── config.json
+│   │   ├── gitattributes (1)
+│   │   ├── map.jpeg
+│   │   ├── pytorch_model.bin
+│   │   ├── tokenizer_config.json
+│   │   ├── vocab.txt
+│   └── gector_roberta_large_5k/
+│       ├── README.md
+│       ├── added_tokens.json
+│       ├── config.json
+│       ├── gitattributes
+│       ├── merges.txt
+│       ├── pytorch_model.bin
+│       ├── special_tokens_map.json
+│       ├── tokenizer.json
+│       ├── tokenizer_config.json
+│       ├── vocab.json
 ├── notebooks/
 │   ├── README.md
 │   ├── __init__.py
@@ -120,13 +159,26 @@ solar-challenge-week1/
 │   │   ├── oracle_connector.py
 │   ├── nlp/
 │   │   ├── keyword_theme_extractor.py
+│   │   ├── review_loader.py
 │   │   ├── sentiment_classifier.py
+│   │   ├── stopwords.py
+│   │   ├── text_normalizer.py
 │   ├── scraper/
 │   │   ├── review_scraper.py
-│   └── utils/
-│       ├── preprocessing.py
+│   └── visualization/
+│       ├── plot_generator.py
+│       ├── theme_data_loader.py
+│       ├── theme_metrics.py
 ├── tests/
 │   ├── __init__.py
+│   ├── test_data_loader.py
+│   ├── test_theme_metrics.py
+│   └── fixtures/
+│       ├── malformed_data.csv
+│       ├── malformed_themes_data.csv
+│       ├── missing_column_data.csv
+│       ├── theme_metrics_data.csv
+│       ├── valid_data.csv
 └── ui/
     ├── app_streamlit.py
 <!-- TREE END -->
@@ -136,13 +188,13 @@ solar-challenge-week1/
 
 - ☑️ Task 1 complete: scraping and cleaning pipeline finalized
 
-- ☑️ Streamlit UI for end-to-end data collection and preprocessing
+- ☑️ Task 2 complete: sentiment + theme NLP pipeline implemented and exported
 
-- ☑️ Modular architecture for reuse in scripts and notebooks
+- ☑️ Streamlit UI for full-cycle review management (scrape → clean)
 
-- ☑️ Row diagnostics and metadata tracking implemented
+- ☑️ Task 3 in progress: Oracle XE relational storage + ER schema
 
-- ☑️ Ready for Task 2: Sentiment & Thematic NLP Pipeline
+- ☑️ Task 4 scaffolded: Insight visualizations and KPI diagnostics
 
 
 ## 📦 What's in This Repo
@@ -150,25 +202,21 @@ solar-challenge-week1/
 This repository is structured to maximize modularity, reusability, and clarity:
 
 - 📁 Scaffolded directory layout for pipelines, UIs, and NLP modules
+
 - 💻 Streamlit UI for scraping and cleaning with per-bank selection, export toggles, and file previews
+
 - 🧪 CI/CD automation via GitHub Actions for reproducibility
+
 - 🧹 Auto-updating README structure using generate_tree.py
-- 📚 Notebook-first development with clean progression through all tasks
-This repository documents the Week 1 challenge for 10 Academy’s AI Mastery Bootcamp. It includes:
-
-- 📁 **Scaffolded directory structure** using best practices for `src/`, `notebooks/`, `scripts/`, and `tests/`
-
-- 💻 Streamlit UI for scraping and cleaning with per-bank selection, export toggles, and file previews
-
-- 🧪 **CI/CD integration** via GitHub Actions for reproducibility and reliability
-
-- 🧹 **README auto-updating** via `scripts/generate_tree.py` to keep documentation aligned with project layout
 
 - 📚 Notebook-first development with clean progression through all tasks
 
-- 📊 Modular EDA workflows for review cleaning, UX issue detection, and app-specific user sentiment
+- 🧠 NLP pipeline for sentiment scoring and thematic extraction using BERT + TF-IDF + rule-based seeds
+
+- 📊 Diagnostic plots to support stakeholder-facing UX recommendations
 
 - 📚 **Clear Git hygiene** (no committed `.venv` or `.csv`), commit messages and pull request usage
+
 
 - 🧠 **My Contributions:** All project scaffolding, README setup, automation scripts, and CI configuration were done from scratch by me
 
@@ -256,6 +304,115 @@ Both the Streamlit app and script-based runners share the same core logic, imple
 - `scripts/generate_tree.py` – Auto-generates folder tree for `README.md`
 
 Each module is written using object-oriented principles and is fully reusable across CLI, notebook, and UI contexts.
+
+
+### 🧠 NLP Pipeline + Storage + Visuals
+
+This section summarizes the full enrichment, database, and insights flow from **Task 2**, **Task 3**, and **Task 4**.
+
+---
+
+#### 🔹 Task 2: Sentiment + Theme Enrichment
+
+Run the full sentiment and theme extraction pipeline with:
+
+```bash
+python scripts/sentiment_pipeline.py
+```
+
+What it does:
+
+- 🧹 Loads cleaned reviews from `data/cleaned/`
+
+- 🔡 Normalizes text using **SymSpell** and **spaCy**
+
+- 💬 Applies ensemble sentiment scoring:
+
+    - `VADER`
+    - `TextBlob`
+    - `DistilBERT` (locally loaded from `models/`)
+
+- 📊 Assigns each review:
+
+    - `ensemble_sentiment` label (bullish, neutral, bearish)
+    - `sentiment_uncertainty` (std deviation of ensemble)
+    - `sentiment_mismatch_flag` if BERT disagrees with VADER/TextBlob
+
+🔍 Extracts:
+
+- Top **keywords** (via TF-IDF)
+
+- Top **keyphrases** (noun chunking)
+
+- UX **themes** (from curated keyword–theme dictionaries)
+
+💾 Saves outputs to:
+
+- `data/outputs/reviews_enriched_all.csv`
+
+- `data/outputs/reviews_with_sentiment_themes.csv`
+
+✅ Designed to **auto-run** with no input flags or prompts.
+
+---
+
+### 🛢️ Task 3: Oracle XE Insertion
+Insert enriched reviews into a **relational Oracle XE database** with:
+
+```bash
+python scripts/oracle_insert.py
+```
+
+What it does:
+
+- 📦 Loads enriched review file from:
+
+    - `data/outputs/reviews_with_sentiment_themes.csv`
+
+- 🏗️ Defines and initializes schema:
+
+    - `reviews` table with fields for rating, sentiment, text, and metadata
+    - `themes` table (if normalized)
+
+- 🔗 Connects to Oracle XE (uses `src/db/oracle_connector.py`)
+
+- 🧩 Inserts cleaned records with:
+
+    - Full error handling
+    - Per-row diagnostic feedback if insertions fail
+
+- 🛑 Can be rerun idempotently (e.g. if schema already exists)
+
+☑️ Safe to run from CLI after enrichment is complete.
+
+---
+
+### 📈 Task 4: Visualization & KPI Dashboard
+Run all Task 4 UX and sentiment visualizations with:
+
+```bash
+python scripts/visualize_insights.py
+```
+
+What it does:
+
+- 🧠 Loads enriched reviews from `data/outputs/reviews_with_sentiment_themes.csv`
+
+- 📊 Auto-generates plots for:
+
+    - 📈 Average rating per theme per bank (heatmap)
+    - 🔥 Complaint clusters (negative sentiment by theme and bank)
+    - ☁️ Word clouds (bank-specific vocabulary)
+    - 🛠️ Feature request volume (negative themes only)
+    - 💎 Bubble chart for theme occurrence vs avg. rating
+
+- 📍 Top-level theme in bubble chart is editable in-code
+
+- 📂 Does not auto-save — plots are rendered inline
+
+- ✅ Designed for notebook-first and CLI workflows
+
+No flags or CLI inputs required — this script auto-runs all diagnostics sequentially.
 
 
 ## 🧠 Design Philosophy

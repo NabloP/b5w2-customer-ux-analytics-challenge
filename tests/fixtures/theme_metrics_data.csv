@@ -1,0 +1,7 @@
+review,rating,ensemble,bank,themes,date
+Good UI,5,0.8,CBE,['UI/UX'],2024-01-01
+Bad service,2,-0.6,CBE,['Service'],2024-01-02
+Excellent functionality,5,0.9,BOA,['Functionality'],2024-01-03
+Terrible UI,1,-0.8,BOA,['UI/UX'],2024-01-04
+Fast and responsive,4,0.7,Dashen,['Speed'],2024-01-05
+Too many bugs,2,-0.7,Dashen,['Functionality'],2024-01-06

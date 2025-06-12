@@ -192,9 +192,9 @@ solar-challenge-week1/
 
 - ☑️ Streamlit UI for full-cycle review management (scrape → clean)
 
-- ☑️ Task 3 in progress: Oracle XE relational storage + ER schema
+- ☑️ Task 3 complete: Oracle XE relational storage + ER schema
 
-- ☑️ Task 4 scaffolded: Insight visualizations and KPI diagnostics
+- ☑️ Task 4 complete: Insight visualizations and KPI diagnostics
 
 
 ## 📦 What's in This Repo
@@ -356,8 +356,45 @@ What it does:
 
 ---
 
-### 🛢️ Task 3: Oracle XE Insertion
-Insert enriched reviews into a **relational Oracle XE database** with:
+### 🛢️ Task 3: Oracle XE Database Integration (Relational Storage)
+
+The project includes full support for enterprise-grade relational storage using Oracle XE. Reviews are inserted into a normalized schema with integrity constraints.
+
+**Key Features:**
+
+- ✅ `banks` and `reviews` tables in 3NF
+
+- ✅ Modular insert logic via `oracle_insert.py`
+
+- ✅ Connection security via `os.getenv()` (no hardcoded secrets)
+
+- ✅ Full rollback + diagnostic prints on insert failure
+
+- ✅ Schema DDL included for reproducibility
+
+### 🧱 Schema Design
+
+1. **`banks` Table**
+
+| Column      | Type        | Description            |
+|-------------|-------------|------------------------|
+| `bank_id`   | INTEGER PK  | Unique bank identifier |
+| `bank_name` | VARCHAR(50) | Name of the bank       |
+
+2. reviews Table
+
+| Column        | Type             | Description                          |
+|---------------|------------------|--------------------------------------|
+| `review_id`   | VARCHAR2(100) PK | Unique review ID                     |
+| `bank_id`     | INTEGER FK       | Foreign key referencing banks        |
+| `review_text` | CLOB             | Full text of the review              |
+| `rating`      | INTEGER          | App rating (1 to 5)                  |
+| `review_date` | DATE             | Parsed date of review                |
+| `source`      | VARCHAR2(50)     | Always 'Google Play' in this project |
+
+### 🔌 Usage
+
+To insert reviews into Oracle XE after enrichment:
 
 ```bash
 python scripts/oracle_insert.py
@@ -384,6 +421,17 @@ What it does:
 - 🛑 Can be rerun idempotently (e.g. if schema already exists)
 
 ☑️ Safe to run from CLI after enrichment is complete.
+
+📁 Related Files:
+
+- `scripts/oracle_insert.py`: Insert runner
+
+- `src/db/oracle_connector.py`: Secure DB connection
+
+- `task-3-oracle-storage.ipynb`: Notebook walkthrough of schema + insert test
+
+
+**📄 [Oracle XE Storage Documentation](docs/oracle_storage_overview.md)**
 
 ---
 
